@@ -33,8 +33,6 @@ difference() {
 }
 
 
-
-
 module hex_edge(rot) {
     rotate([0, 0, rot]) 
       translate([INNER_RADIUS - 3, 0, H + 1])
@@ -58,17 +56,13 @@ module corner(rot) {
 
 module magnet(rot) {
   rotate([0, 0, rot]) {
-    translate([21.5, 0, 2.45]) {
+    translate([28.5, -5.5, 2]) {
+      rotate([90, 355, 180]) {
+        cylinder(h = 11, r = 2, $fn=50);
 
-      rotate([90, 0, 90]) {
-        translate([-7, 0, 0])
-          cylinder(h = 9.7, r = 2.3, $fn=50);
-
-        translate([7, 0, 0])
-          cylinder(h = 9.7, r = 2.3, $fn=50);
+        translate([4, 0, 5.5])
+          cube(size=[8, 4, 11], center = true);
       }
     }
-
-    
   }
 }

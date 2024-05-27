@@ -2,11 +2,11 @@
 $fn=200;
 THICK = 1;
 
-TILE_L = 8;
+TILE_L = 23;
 TILE_COUNT = 16;
 
 BOX_W = 64;
-BOX_L = 44 + (TILE_L * 8);
+BOX_L = 142.5;
 BOX_H = 32;
 
 difference() {
@@ -17,7 +17,7 @@ difference() {
 
     translate([33, -5, 38])
         rotate([0, 90, 90]) 
-            cylinder(h = 200, r = 33, $fn=6);
+            cylinder(h = 300, r = 33, $fn=6);
 
     tile_slot(1);
     tile_slot(1 + TILE_L);
@@ -34,18 +34,14 @@ difference() {
     tile_slot(23 + (TILE_L * 4));
     tile_slot(23 + (TILE_L * 5));
 
-    tile_slot(28.5 + (TILE_L * 5));
-    tile_slot(28.5 + (TILE_L * 6));
+    // tile_slot(38.5 + (TILE_L * 5));
+    // tile_slot(38.5 + (TILE_L * 6));
 
-    tile_slot(34 + (TILE_L * 6));
-    tile_slot(34 + (TILE_L * 7));
+    // tile_slot(46 + (TILE_L * 6));
+    // tile_slot(46 + (TILE_L * 7));
 
-    tile_slot(39.5 + (TILE_L * 7));
-    tile_slot(39.5 + (TILE_L * 8));
-
-    // for (i = [THICK : TILE_L + 1 : THICK + ((TILE_L + 1) * (TILE_COUNT - 1))] ) {
-    //     tile_slot(i);
-    // }
+    // tile_slot(53.5 + (TILE_L * 7));
+    // tile_slot(53.5 + (TILE_L * 8));
 }
 
 module tile_slot(y) {

@@ -6,7 +6,7 @@ TILE_L = 25;
 TILE_COUNT = 6;
 
 BOX_W = 64;
-BOX_L = 95.5;
+BOX_L = 91.5;
 BOX_H = 32;
 
 difference() {
@@ -22,15 +22,15 @@ difference() {
     tile_slot(1);
     tile_slot(1 + TILE_L);
 
-    tile_slot(33);
-    tile_slot(33 + TILE_L);
+    tile_slot(6.5 + TILE_L);
+    tile_slot(6.5 + (TILE_L * 2));
 
-    tile_slot(65);
-    tile_slot(65 + TILE_L);
+    tile_slot(12 + (TILE_L * 2));
+    tile_slot(12 + (TILE_L * 3));
 }
 
 module tile_slot(y) {
     translate([33, y, 38])
         rotate([0, 90, 90]) 
-            cylinder(h = 6.5, r = 37, $fn=6);
+            cylinder(h = 5.5, r = 37, $fn=6);
 }

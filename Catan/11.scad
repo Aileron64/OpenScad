@@ -3,7 +3,7 @@ H = 5;
 R = 10.15;
 
 linear_extrude(H)
-  text("8",size=16,font="PartyBusiness",halign="center",valign="center");
+  text("8",size=16,font="Hobbinton brush",halign="center",valign="center");
 
 difference() {
   cylinder(r=R, h=H, $fn=255);
