@@ -3,27 +3,46 @@ $fn=200;
 
 CORE_LENGTH = 87;
 
-// rotate([90, 0, 0])
-//     import("C:/Users/AlexT/Desktop/3D Printing/nintendo-switch-dock-spring-system-internals-model_files/internals assembly - switch internals top.STL");
 
-// translate([12.5, -6.5, 27])
-//     springThing();
+translate([12.5, -6.5, 27])
+    springThing();
 
-bottom();
+// bottom();
 
 module springThing() {
     difference() {
-        cube(size = [50.2, 12.2, 2]);
+        cube(size = [60.2, 12.2, 1.5]);
 
-        translate([25.1, 6.1, 0])
+        translate([30.1, 6.1, 0])
         usbC();
     }
 
-    translate([45.05, 6.1, 2])
-        cylinder(h = 3, r1 = 2.4, r2 = 0.5, center=false);
+    translate([0, 6.1, -8.5])
+        rotate([0, 0, 180])    
+            spring();
 
-    translate([5.1, 6.1, 2])
-        cylinder(h = 3, r1 = 2.4, r2 = 0.5, center=false);
+    translate([60.2, 6.1, -8.5])
+        spring();
+        
+    translate([50.05, 6.1, 1.5])
+        cylinder(h = 2.5, r1 = 2, r2 = 0.5, center=false);
+
+    translate([10.1, 6.1, 1.5])
+        cylinder(h = 2.5, r1 = 2, r2 = 0.5, center=false);
+}
+
+module spring() {
+    difference() {
+        union() {
+            cylinder(h = 10, r=6.1);
+
+            translate([4, 0, 0])
+                cylinder(h = 2, r=6.1);
+        }
+        
+        translate([0, 0, -2])
+            cylinder(h = 6, r=3);
+    }
 }
 
 R = 1.35;
