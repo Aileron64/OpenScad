@@ -8,24 +8,13 @@ SWITCH_LENGTH = 171;
 
 // bottom();
 
-mainDock();
+// mainDock();
 
-// top();
+top();
 
 MAIN_DOCK_X = -33.65;
 MAIN_DOCK_Y = 2;
 MAIN_DOCK_Z = 12;
-
-module testCrop() {
-    translate([-45, 0, 0]) 
-        cube(size = [50, 150, 50]);
-
-    translate([0, 30, 0]) 
-        cube(size = [150, 150, 50]);
-
-    translate([CORE_LENGTH + 11, 0, 0]) 
-        cube(size = [50, 150, 50]);
-}
 
 module top() {
     difference() {
@@ -34,12 +23,36 @@ module top() {
                 mainDock();
 
         boardGap();
-        //testCrop();
+        airGap();
     }
 
+    translate([MAIN_DOCK_X, -2.95, 0]) 
+        cube(size = [171, 3, 13]);
 
     difference() {
-        cube(size = [CORE_LENGTH + 16, 80, 13]);
+        union() {
+            cube(size = [CORE_LENGTH + 15, 90, 16]);
+
+            translate([48.5, 42, 0]) 
+                rotate([20, 0, 0])
+                    cube(size = [7, 30, 70]);
+
+            translate([18.5, 42, 0]) 
+                rotate([20, 0, 0])
+                    cube(size = [4, 22, 70]);
+
+            translate([81.5, 42, 0]) 
+                rotate([20, 0, 0])
+                    cube(size = [4, 22, 70]);
+
+            translate([MAIN_DOCK_X, -2.95, 0]) 
+                cube(size = [171, 42.6, 13]);
+        }
+
+        translate([0, 0, 0])
+            rotate([-10, 0, 0])
+                cube(size = [100, 22, 100]);
+
         boardGap();
             
         translate([MAIN_DOCK_X, MAIN_DOCK_Y, MAIN_DOCK_Z]) 
@@ -60,6 +73,16 @@ module top() {
         }
         
         //testCrop();
+    }
+}
+
+module airGap() {
+    translate([2, 10, 17]) {
+        cube([45, 100, 10]);
+    }
+        
+    translate([57, 10, 17]) {
+        cube([44, 100, 10]);
     }
 }
 
@@ -102,17 +125,34 @@ module mainDock() {
                 cylinder(r=15, h=8);
     }
 
-    translate([0, 22, 0]) {
-        cube(size = [SWITCH_LENGTH, 15, 85]);
+    rotate([-1.5, 0, 0]) {
+        translate([15, 20, 0]) 
+            cube([12, 2, 80]);
 
-        translate([15, 0, 85]) 
+        translate([SWITCH_LENGTH - 27, 20, 0]) 
+            cube([12, 2, 80]);
+    }
+
+    rotate([3, 0, 0]) {
+        translate([15, 3, 0]) 
+            cube([12, 2, 38]);
+
+        translate([SWITCH_LENGTH - 27, 3, 0]) 
+            cube([12, 2, 38]);
+    }
+
+        
+    translate([0, 22, 0]) {
+        cube(size = [SWITCH_LENGTH, 15, 65]);
+
+        translate([15, 0, 65]) 
             cube(size = [SWITCH_LENGTH - 30, 15, 15]);
     
-        translate([15, 0, 85])
+        translate([15, 0, 65])
             rotate([-90, 0, 0]) 
                 cylinder(r=15, h=15);
 
-        translate([SWITCH_LENGTH - 15, 0, 85])
+        translate([SWITCH_LENGTH - 15, 0, 65])
             rotate([-90, 0, 0]) 
                 cylinder(r=15, h=15);
     }
@@ -135,11 +175,11 @@ module mainDockGap() {
         difference() {
             cube(size = [SWITCH_LENGTH + 4, 19, 10]);
 
-            translate([11, 0, 0]) 
-                cube(size = [10, 19, 10]);
+            // translate([11, 0, 0]) 
+            //     cube(size = [10, 19, 10]);
 
-            translate([SWITCH_LENGTH - 19, 0, 0]) 
-                cube(size = [10, 19, 10]);
+            // translate([SWITCH_LENGTH - 19, 0, 0]) 
+            //     cube(size = [10, 19, 10]);
         }
 
     translate([55, 6, -5]) {
@@ -360,4 +400,15 @@ module bridgeBoard(pos, rot) {
             }
         }
     }
+}
+
+module testCrop() {
+    translate([-45, 0, 0]) 
+        cube(size = [50, 150, 50]);
+
+    translate([0, 30, 0]) 
+        cube(size = [150, 150, 50]);
+
+    translate([CORE_LENGTH + 11, 0, 0]) 
+        cube(size = [50, 150, 50]);
 }
