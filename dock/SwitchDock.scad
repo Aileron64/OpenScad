@@ -4,13 +4,13 @@ $fn=200;
 CORE_LENGTH = 88;
 SWITCH_LENGTH = 171;
 
-// springThing();
+springThing();
 
 // bottom();
 
 // mainDock();
 
-top();
+// top();
 
 MAIN_DOCK_X = -33.65;
 MAIN_DOCK_Y = 2;
@@ -28,6 +28,10 @@ module top() {
 
     translate([MAIN_DOCK_X, -2.95, 0]) 
         cube(size = [171, 3, 13]);
+
+        // translate([0, 0, 30])
+        //     rotate([-10, 0, 0])
+        //         cube(size = [100, 32, 120]);
 
     difference() {
         union() {
@@ -49,10 +53,10 @@ module top() {
                 cube(size = [171, 42.6, 13]);
         }
 
-        translate([0, 0, 0])
+        translate([0, 0, 30])
             rotate([-10, 0, 0])
-                cube(size = [100, 22, 100]);
-
+                cube(size = [100, 32, 120]);
+                
         boardGap();
             
         translate([MAIN_DOCK_X, MAIN_DOCK_Y, MAIN_DOCK_Z]) 
@@ -72,7 +76,7 @@ module top() {
             }
         }
         
-        //testCrop();
+
     }
 }
 
@@ -100,7 +104,11 @@ module boardGap() {
             cylinder(h = 8, r = 1.5);
 
         translate([CORE_LENGTH - 5, 36, 5])
-            cylinder(h = 8, r = 1.5);                
+            cylinder(h = 8, r = 1.5);    
+
+        translate([56.25, 46, 6.2]) 
+            rotate([90, 0, 0])
+                usbC();
     }
 }
 
@@ -125,13 +133,28 @@ module mainDock() {
                 cylinder(r=15, h=8);
     }
 
-    rotate([-1.5, 0, 0]) {
-        translate([15, 20, 0]) 
-            cube([12, 2, 80]);
+    // rotate([-1.5, 0, 0]) {
+    //     translate([15, 20, 0]) 
+    //         cube([12, 2, 80]);
 
-        translate([SWITCH_LENGTH - 27, 20, 0]) 
-            cube([12, 2, 80]);
-    }
+    //     translate([SWITCH_LENGTH - 27, 20, 0]) 
+    //         cube([12, 2, 80]);
+    // }
+
+    translate([0, 0, 40]) 
+        rotate([-3, 0, 0]) {
+            translate([15, 20, 0]) 
+                cube([12, 2, 38]);
+
+            translate([SWITCH_LENGTH - 27, 20, 0]) 
+                cube([12, 2, 38]);
+        }
+
+    translate([15, 20, 0]) 
+        cube([12, 2, 39]);
+
+    translate([SWITCH_LENGTH - 27, 20, 0]) 
+        cube([12, 2, 39]);
 
     rotate([3, 0, 0]) {
         translate([15, 3, 0]) 
@@ -194,52 +217,74 @@ module mainDockGap() {
 }
 
 module springThing() {
+
     difference() {
-        cube(size = [60.2, 12.2, 2.5]);
+        cube(size = [60.2, 13, 2]);
 
         translate([30.1, 6.1, 0])
             usbC();
 
-        translate([30.1, 6.1, -58.2])
-            scale(4)
-                usbC();
+        translate([12.05, 0, -2])
+            cube(size = [36.1, 22.2, 3]);
 
-        translate([25.6, 10, -5])
-            cube(size = [9, 10, 10]);
+        // translate([30.1, 6.1, -58.4])
+        //     scale(4)
+        //         usbC();
+
+        translate([25.9, 11, -5])
+            cube(size = [8.4, 10, 10]);
 
         translate([0, 6.1, 0])
-            cylinder(h = 10, r=3);
+            cylinder(h = 10, r=5.3);
 
         translate([60.2, 6.1, 0])
-            cylinder(h = 10, r=3);
+            cylinder(h = 10, r=5.3);
     }
 
-    translate([0, 6.1, -7.5])
+    translate([0, 6.5, -7])
         rotate([0, 0, 180])    
-            spring();
+            difference() {
+                union() {
+                    cylinder(h = 9, r=6.5);
 
-    translate([60.2, 6.1, -7.5])
-        spring();
-        
-    translate([50.05, 6.1, 2.5])
-        cylinder(h = 2.5, r1 = 2, r2 = 0.5, center=false);
+                    translate([4, 0, 0])
+                        cylinder(h = 1, r=6.1);
 
-    translate([10.1, 6.1, 2.5])
-        cylinder(h = 2.5, r1 = 2, r2 = 0.5, center=false);
-}
+                    translate([-2, 4, 0])
+                        cylinder(h = 1, r=6.1);
+                }
+                
+                // translate([0, 0, -1.5])
+                //     cylinder(h = 8, r=4);
 
-module spring() {
-    difference() {
-        union() {
-            cylinder(h = 10, r=6.1);
+                translate([0, 0, -1.5])
+                    cylinder(h = 9, r=5.3);
+            }
 
-            translate([4, 0, 0])
-                cylinder(h = 1, r=6.1);
+    translate([60.2, 6.5, -7])
+        difference() {
+            union() {
+                cylinder(h = 9, r=6.5);
+
+                translate([4, 0, 0])
+                    cylinder(h = 1, r=6.1);
+
+                translate([-2, -4, 0])
+                    cylinder(h = 1, r=6.1);
+            }
+            
+            // translate([0, 0, -1.5])
+            //     cylinder(h = 8, r=4);
+
+            translate([0, 0, -1.5])
+                cylinder(h = 9, r=5.3);
         }
         
-        translate([0, 0, -1.5])
-            cylinder(h = 10, r=3);
-    }
+    translate([50.05, 6.1, 1])
+        cylinder(h = 2.5, r1 = 2, r2 = 0.5, center=false);
+
+    translate([10.1, 6.1, 1])
+        cylinder(h = 2.5, r1 = 2, r2 = 0.5, center=false);
 }
 
 R = 1.35;
@@ -269,7 +314,7 @@ module usbHolder(pos) {
                 
             rotate([10, 0, 0]) 
             {
-                cube(size = [CORE_LENGTH, 20, 60]);
+                cube(size = [CORE_LENGTH, 20, 10]);
 
                 translate([36, -15, 2]) 
                     cube(size = [15, 24, 10]);
@@ -290,15 +335,40 @@ module usbHolder(pos) {
             }
         }
 
+        LEFT_SCREW = 4.3;
+        RIGHT_SCREW = 26.7;
+
         rotate([10, 0, 0]) {
             difference() {
                 cube(size = [CORE_LENGTH, 20, 6]);
             
-                translate([27, 2, 2]) 
-                    cube(size = [33, 14, 10]);
+                translate([28, 3.25, 3.2]) {
+                    rotate([-1, 0, 0]) {
+                        difference() {
+                            cube(size = [31, 11.5, 10]);
 
-                translate([24, 6, 2]) 
-                    cube(size = [39, 3, 10]);
+                            cube(size = [5, 12, 1]);
+
+                            translate([26, 0, 0])
+                                cube(size = [5, 12, 1]);
+
+                            translate([LEFT_SCREW, 6, 0])
+                                cylinder(h = 1, r = 2);
+
+                            translate([RIGHT_SCREW, 6, 0])
+                                cylinder(h = 1, r = 2);
+                        }
+
+                        translate([LEFT_SCREW, 6, -2])
+                            cylinder(h = 4, r = 0.8);
+
+                        translate([RIGHT_SCREW, 6, -2])
+                            cylinder(h = 4, r = 0.8);
+                    }
+                }
+
+                // translate([24, 6, 2]) 
+                //     cube(size = [39, 3, 10]);
             
                 translate([36, -15, 2]) 
                     cube(size = [15, 24, 10]);
@@ -316,8 +386,22 @@ module usbHolder(pos) {
                                     cylinder(h = 15, r=7);
                             }
                             
-                            translate([0, 0, -2])
-                                cylinder(h = 10, r=1.2);
+                            translate([0, 0, -2]){
+                                cylinder(h = 8, r=2.5);
+
+                                difference(){
+                                    union() {
+                                        cylinder(h = 7, r= 4.75);
+
+                                        translate([0, 0, 7])
+                                            cylinder(h = 1, r1 = 4.75, r2 = 4.2);
+                                    }
+                            
+                                    translate([0, 0, 3])
+                                        cylinder(h = 15, r=4);
+                                }
+                            }   
+                                
                         }
                     }
 
@@ -333,8 +417,21 @@ module usbHolder(pos) {
                                 cylinder(h = 15, r=7);
                         }
                         
-                        translate([0, 0, -2])
-                            cylinder(h = 10, r=1.2);
+                        translate([0, 0, -2]){
+                            cylinder(h = 8, r=2.5);
+
+                            difference(){
+                                union() {
+                                    cylinder(h = 7, r= 4.75);
+
+                                    translate([0, 0, 7]) 
+                                        cylinder(h = 1, r1 = 4.75, r2 = 4.2);
+                                }
+                                
+                                translate([0, 0, 3])
+                                    cylinder(h = 15, r=4);
+                            }
+                        }   
                     }
                 }
             }
@@ -354,7 +451,7 @@ module bridgeBoard(pos, rot) {
     translate(pos) {
         rotate(rot) {
             difference() {
-                cube(size = [CORE_LENGTH, 41, 6]);
+                cube(size = [CORE_LENGTH, 42, 6]);
 
                 translate([34, 7, 2]) {
                     difference() {
@@ -385,6 +482,9 @@ module bridgeBoard(pos, rot) {
                 translate([56.25, 50, 4.8]) 
                     rotate([90, 0, 0])
                         usbC();
+
+                translate([51.71, 39, 4.8])
+                        cube([9.07, 4, 4]);
 
                 translate([5, 5, 0])
                     screw();
