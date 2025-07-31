@@ -6,14 +6,14 @@
 THICK = 1;
 MARGIN = 0;
 
-CROP_MARGIN = 8;
+CROP_MARGIN = 3;
 
 RAD = 18;
-SLOT_SIZE = RAD * 2 + 20;
+SLOT_SIZE = RAD * 2 + 10;
 
 GAP = 30;
 
-BOX_X = SLOT_SIZE * 4 + THICK - (CROP_MARGIN * 2) - 1;
+BOX_X = SLOT_SIZE * 3 + 17;
 BOX_Y = 68;
 BOX_Z = 38;
 
@@ -44,18 +44,18 @@ difference() {
 difference() {
     union() {
         translate([0, BOX_Y - 16, 1])
-            cube(size = [SLOT_SIZE / 2, 9, 2]);
+            cube(size = [SLOT_SIZE / 2, 9, 7]);
 
         translate([0, BOX_Y - 10, 1])
             cube(size = [SLOT_SIZE / 2, 9, BOX_Z / 2]);
 
-        translate([BOX_X - (SLOT_SIZE / 2) - 1, BOX_Y - 10, 1])
+        translate([BOX_X - (SLOT_SIZE / 2) - 1, 1, 1])
             cube(size = [SLOT_SIZE / 2, 9, BOX_Z / 2]);
 
-        translate([BOX_X - (SLOT_SIZE / 2) - 1, BOX_Y - 16, 1])
-            cube(size = [SLOT_SIZE / 2, 9, 2]);
+        translate([BOX_X - (SLOT_SIZE / 2) - 1, 9, 1])
+            cube(size = [SLOT_SIZE / 2, 7, 7]);
 
-        for (i = [0 : 1 : 3]){
+        for (i = [0 : 1 : 2]){
             slot((i * SLOT_SIZE) - CROP_MARGIN, 1, 0);
         }
 
@@ -121,11 +121,11 @@ module slot(x, y, rot) {
 
             translate([0, 16, 22])
             rotate([90, 0, 0])
-                    cylinder(h = 15, r = 20, $fn=255); 
+                    cylinder(h = 15, r = 15, $fn=255); 
 
             translate([SLOT_SIZE, 16, 22])
             rotate([90, 0, 0])
-                    cylinder(h = 15, r = 20, $fn=255); 
+                    cylinder(h = 15, r = 15, $fn=255); 
         }
 
 
